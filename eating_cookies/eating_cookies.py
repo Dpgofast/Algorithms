@@ -8,6 +8,7 @@ import sys
 
 
 def eating_cookies(n, cache={}):
+
     # Base cases
     if n < 0:
         return 0
@@ -22,7 +23,11 @@ def eating_cookies(n, cache={}):
 
     # recurse it
     if n not in cache:
-        cache[n] = eating_cookies(n-1) + eating_cookies(n-2) + eating_cookies(n-3)
+        cache[n] = (
+            eating_cookies(n-1) +
+            eating_cookies(n-2) +
+            eating_cookies(n-3)
+            )
     return cache[n]
 
 
@@ -31,7 +36,8 @@ if __name__ == "__main__":
         num_cookies = int(sys.argv[1])
         print(
             """There are {ways} ways for Cookie Monster to eat
-             {n}cookies.""".format(ways=eating_cookies(num_cookies), n=num_cookies)
+             {n}cookies.""".format(
+                 ways=eating_cookies(num_cookies), n=num_cookies)
              )
     else:
         print('Usage: eating_cookies.py [num_cookies]')
